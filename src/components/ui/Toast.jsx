@@ -2,10 +2,6 @@ import React from 'react';
 import { ToastContainer as ToastifyContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-/**
- * Custom Toast Container component that wraps react-toastify
- * with our application's styling directives
- */
 const ToastContainer = () => {
   return (
     <ToastifyContainer

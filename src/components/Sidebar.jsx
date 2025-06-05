@@ -65,7 +65,6 @@ const Sidebar = () => {
     { icon: faChartLine, label: 'Reports', path: '/app/reports' },
     { icon: faTable, label: 'Test Page', path: '/app/testpage' },
     { icon: faMessage, label: 'Messages', path: '/app/messages' },
-    { icon: faCog, label: 'Settings', path: '/app/settings' },
   ];
 
   const handleLogoutClick = () => {

@@ -8,7 +8,6 @@ import {
   faExclamationTriangle,
 } from '@fortawesome/free-solid-svg-icons';
 
-// Create the context
 const ToastContext = createContext();
 
 export const ToastProvider = ({ children }) => {
@@ -84,9 +83,6 @@ export const ToastProvider = ({ children }) => {
   );
 };
 
-/**
- * Custom hook to use toast context
- */
 export const useToast = () => {
   const context = useContext(ToastContext);
 

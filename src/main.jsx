@@ -5,6 +5,7 @@ import App from './App.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import TestPage from './pages/TestPage';
+import Profile from './pages/Profile';
 import Login from './Login';
 import Register from './Register.jsx';
 
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: 'testpage',
         element: <TestPage />,
+      },
+      {
+        path: 'profile',
+        element: <Profile />,
       },
       {
         path: '',
