@@ -13,6 +13,7 @@ import {
   faFilter,
   faSearch,
 } from '@fortawesome/free-solid-svg-icons';
+import { useToast } from '../../../context/ToastContext';
 
 // Sample data
 const generateData = () => {
@@ -37,6 +38,7 @@ const generateData = () => {
 const data = generateData();
 
 const TestTable = () => {
+  const toast = useToast();
   const [sortField, setSortField] = useState('id');
   const [sortDirection, setSortDirection] = useState('asc');
   const [currentPage, setCurrentPage] = useState(1);
@@ -79,6 +81,21 @@ const TestTable = () => {
       setSelectedRows(selectedRows.filter((rowId) => rowId !== id));
     } else {
       setSelectedRows([...selectedRows, id]);
+    }
+  };
+  // Handle delete action
+  const handleDelete = (id, name) => {
+    // Here you would typically call an API to delete the item
+
+    // For demonstration, let's use different toast types based on the task ID
+    if (id % 4 === 0) {
+      toast.error(`Failed to delete task "${name}". Please try again.`);
+    } else if (id % 4 === 1) {
+      toast.success(`Task "${name}" deleted successfully!`);
+    } else if (id % 4 === 2) {
+      toast.info(`Task "${name}" moved to archive.`);
+    } else {
+      toast.warning(`Task "${name}" will be permanently deleted.`);
     }
   };
 
@@ -306,7 +323,10 @@ const TestTable = () => {
                       <button className="text-gray-400 hover:text-brand transition-colors">
                         <FontAwesomeIcon icon={faPencil} />
                       </button>
-                      <button className="text-gray-400 hover:text-red-500 transition-colors">
+                      <button
+                        className="text-gray-400 hover:text-red-500 transition-colors"
+                        onClick={() => handleDelete(row.id, row.name)}
+                      >
                         <FontAwesomeIcon icon={faTrash} />
                       </button>
                     </div>

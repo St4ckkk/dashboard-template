@@ -14,7 +14,7 @@
 
 @layer base {
   body {
-    font-family: 'DM Sans', serif;
+    font-family: 'DM Sans', sans-serif;
     font-optical-sizing: auto;
     background: var(--color-secondary);
     color: var(--color-dark-100);
@@ -178,5 +178,146 @@
 
   .status-badge-gray {
     @apply bg-gray-100 text-gray-800;
+  }
+
+  /* Modal Styles */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4;
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  .modal-container {
+    @apply bg-white w-full rounded-lg shadow-xl overflow-hidden border border-gray-100;
+    animation: scaleIn 0.15s ease-out;
+  }
+
+  .modal-header {
+    @apply flex items-center justify-between px-4 py-3 border-b border-gray-100;
+  }
+
+  .modal-title-container {
+    @apply flex items-center gap-2;
+  }
+
+  .modal-title {
+    @apply text-base font-medium text-gray-700;
+  }
+
+  .modal-close-btn {
+    @apply p-1 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors text-sm;
+  }
+
+  .modal-content {
+    @apply px-4 py-3 text-gray-600 text-sm;
+  }
+
+  .modal-footer {
+    @apply flex justify-end gap-2 px-4 py-3 border-t border-gray-100 bg-gray-50;
+  }
+
+  /* Modal Buttons */
+  .modal-btn {
+    @apply px-3 py-1.5 rounded-md text-xs font-medium transition-colors;
+  }
+
+  .modal-btn-primary {
+    @apply bg-brand text-white hover:bg-brand/90;
+  }
+
+  .modal-btn-secondary {
+    @apply bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200;
+  }
+
+  .modal-btn-danger {
+    @apply bg-red-500 text-white hover:bg-red-600;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Toast Styles */
+  .toast-container {
+    @apply !p-1 !max-w-md !z-50;
+  }
+
+  .toast-item {
+    @apply !bg-white !rounded-md !shadow-sm !border !border-transparent !mb-3 !min-h-0 !p-0 !font-normal;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    height: 50px !important;
+    padding: 5px !important;
+  }
+
+  .toast-item.Toastify__toast--success {
+    @apply !border-l-4 !border-l-green-500;
+  }
+
+  .toast-item.Toastify__toast--error {
+    @apply !border-l-4 !border-l-red-500;
+  }
+
+  .toast-item.Toastify__toast--warning {
+    @apply !border-l-4 !border-l-amber-500;
+  }
+
+  .toast-item.Toastify__toast--info {
+    @apply !border-l-4 !border-l-blue-500;
+  }
+
+  .toast-body {
+    @apply !px-3 !text-sm !font-medium !text-gray-700 !flex !items-center;
+    height: 40px !important;
+    line-height: 40px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .toast-body svg {
+    @apply !mr-2.5;
+    font-size: 16px !important;
+  }
+
+  .toast-progress {
+    @apply !h-2.5 !opacity-80;
+    bottom: -0.3px !important;
+  }
+
+  .Toastify__toast--success .toast-progress {
+    @apply !bg-green-500;
+  }
+
+  .Toastify__toast--error .toast-progress {
+    @apply !bg-red-500;
+  }
+
+  .Toastify__toast--warning .toast-progress {
+    @apply !bg-amber-500;
+  }
+
+  .Toastify__toast--info .toast-progress {
+    @apply !bg-blue-500;
+  }
+
+  .Toastify__close-button {
+    @apply !self-center !text-gray-400 !opacity-100 !p-1 !my-auto !mr-1 hover:!text-gray-600;
+    display: none !important; /* Hide the close button as it's not visible in the screenshot */
   }
 }
