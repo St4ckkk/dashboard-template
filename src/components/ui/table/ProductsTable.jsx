@@ -5,7 +5,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
+} from '@/components/ui/table/table';
 
 const products = [
   { id: '01', name: 'Home Decor Range', percentage: 45, color: 'blue' },

@@ -1,47 +1,41 @@
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Card = ({
-  title = 'text',
+  title,
   subtitle,
   subtitleSecondary,
-  icon,
-  variant = 'white',
-  className = '',
   children,
+  className = '',
   headerAction,
+  icon,
+  variant,
 }) => {
-  // Stat card style (pink, yellow, green, purple with icon)
-  if (icon && ['pink', 'yellow', 'green', 'purple'].includes(variant)) {
+  // For cards with icon variant (the colored stat cards)
+  if (variant) {
     return (
       <div className={`card card-stat card-stat-${variant} ${className}`}>
         <div className={`card-icon card-icon-${variant}`}>
           <FontAwesomeIcon icon={icon} />
         </div>
-        <h3 className={`card-title card-text-${variant}`}>{title}</h3>
-        {subtitle && (
-          <p className={`card-subtitle card-text-${variant}`}>{subtitle}</p>
-        )}
-        {subtitleSecondary && (
-          <p className={`card-subtitle card-text-${variant}`}>
-            {subtitleSecondary}
-          </p>
-        )}
+        <p className={`card-text-${variant} text-sm`}>{title}</p>
+        <h3 className={`card-text-${variant} text-xl font-semibold mb-1`}>
+          {subtitle}
+        </h3>
+        <p className="text-xs text-green-500">{subtitleSecondary}</p>
       </div>
     );
   }
 
-  // Chart/content card style (white with header)
+  // For regular chart cards
   return (
     <div className={`card card-chart ${className}`}>
-      <div className="card-chart-header">
-        <div>
+      {title && (
+        <div className="card-chart-header">
           <h3 className="card-chart-title">{title}</h3>
-          {subtitle && (
-            <p className="card-subtitle text-gray-500">{subtitle}</p>
-          )}
+          {headerAction && <div>{headerAction}</div>}
         </div>
-        {headerAction && <div>{headerAction}</div>}
-      </div>
+      )}
       <div className="card-chart-body">{children}</div>
     </div>
   );

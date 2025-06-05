@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-
-// You'll need to install FontAwesome icons as discussed earlier
+import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import {
   faHome,
   faChartSimple,
@@ -11,42 +10,49 @@ import {
   faChartLine,
   faMessage,
   faCog,
+  faTable,
 } from '@fortawesome/free-solid-svg-icons';
 
-const SidebarItem = ({ icon, label, active, onClick }) => {
+const SidebarItem = ({ icon, label, to, active }) => {
   return (
-    <div
+    <Link
+      to={to}
       className={`flex items-center gap-3 px-4 py-3 rounded-lg cursor-pointer transition-all
-      ${active ? 'bg-brand text-white' : 'text-gray-500 hover:bg-brand '}`}
-      onClick={onClick}
+      ${
+        active
+          ? 'bg-brand text-white'
+          : 'text-gray-500 hover:bg-brand hover:bg-opacity-10 hover:text-brand'
+      }`}
     >
       <FontAwesomeIcon icon={icon} className="w-4" />
       <span className="text-sm">{label}</span>
-    </div>
+    </Link>
   );
 };
 
 const Sidebar = () => {
-  const [activeItem, setActiveItem] = useState('Dashboard');
+  const location = useLocation();
+  const pathname = location.pathname;
 
   const menuItems = [
-    { icon: faHome, label: 'Dashboard' },
-    { icon: faChartSimple, label: 'Lorem ipsum' },
-    { icon: faShoppingCart, label: 'Lorem ipsum' },
-    { icon: faBox, label: 'Lorem ipsum' },
-    { icon: faChartLine, label: 'Lorem ipsum' },
-    { icon: faMessage, label: 'Lorem ipsum' },
-    { icon: faCog, label: 'Lorem ipsum' },
+    { icon: faHome, label: 'Dashboard', path: '/dashboard' },
+    { icon: faChartSimple, label: 'Analytics', path: '/analytics' },
+    { icon: faShoppingCart, label: 'Orders', path: '/orders' },
+    { icon: faBox, label: 'Products', path: '/products' },
+    { icon: faChartLine, label: 'Reports', path: '/reports' },
+    { icon: faTable, label: 'Test Page', path: '/testpage' },
+    { icon: faMessage, label: 'Messages', path: '/messages' },
+    { icon: faCog, label: 'Settings', path: '/settings' },
   ];
 
   return (
     <div className="sticky top-0 left-0 h-screen w-60 bg-primary p-5 flex flex-col justify-between overflow-y-auto">
       {/* Top section with logo and name */}
       <div className="space-y-6">
-        <div className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3">
           <div className="h-8 w-8 rounded-md bg-brand"></div>
           <h1 className="font-bold text-lg">System Name</h1>
-        </div>
+        </Link>
 
         {/* Navigation menu */}
         <div className="flex flex-col gap-1">
@@ -55,8 +61,11 @@ const Sidebar = () => {
               key={item.label}
               icon={item.icon}
               label={item.label}
-              active={activeItem === item.label}
-              onClick={() => setActiveItem(item.label)}
+              to={item.path}
+              active={
+                pathname === item.path ||
+                (pathname === '/' && item.path === '/dashboard')
+              }
             />
           ))}
         </div>
