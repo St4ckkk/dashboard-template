@@ -21,7 +21,7 @@ const SidebarItem = ({ icon, label, to, active }) => {
       ${
         active
           ? 'bg-brand text-white'
-          : 'text-gray-500 hover:bg-brand hover:bg-opacity-10 hover:text-brand'
+          : 'text-gray-500 hover:bg-brand hover:text-white'
       }`}
     >
       <FontAwesomeIcon icon={icon} className="w-4" />
@@ -34,22 +34,24 @@ const Sidebar = () => {
   const location = useLocation();
   const pathname = location.pathname;
 
+  // Updated paths to use /app/ prefix
   const menuItems = [
-    { icon: faHome, label: 'Dashboard', path: '/dashboard' },
-    { icon: faChartSimple, label: 'Analytics', path: '/analytics' },
-    { icon: faShoppingCart, label: 'Orders', path: '/orders' },
-    { icon: faBox, label: 'Products', path: '/products' },
-    { icon: faChartLine, label: 'Reports', path: '/reports' },
-    { icon: faTable, label: 'Test Page', path: '/testpage' },
-    { icon: faMessage, label: 'Messages', path: '/messages' },
-    { icon: faCog, label: 'Settings', path: '/settings' },
+    { icon: faHome, label: 'Dashboard', path: '/app/dashboard' },
+    { icon: faChartSimple, label: 'Analytics', path: '/app/analytics' },
+    { icon: faShoppingCart, label: 'Orders', path: '/app/orders' },
+    { icon: faBox, label: 'Products', path: '/app/products' },
+    { icon: faChartLine, label: 'Reports', path: '/app/reports' },
+    { icon: faTable, label: 'Test Page', path: '/app/testpage' },
+    { icon: faMessage, label: 'Messages', path: '/app/messages' },
+    { icon: faCog, label: 'Settings', path: '/app/settings' },
   ];
 
   return (
     <div className="sticky top-0 left-0 h-screen w-60 bg-primary p-5 flex flex-col justify-between overflow-y-auto">
       {/* Top section with logo and name */}
       <div className="space-y-6">
-        <Link to="/" className="flex items-center gap-3">
+        {/* Updated link to point to dashboard instead of / */}
+        <Link to="/app/dashboard" className="flex items-center gap-3">
           <div className="h-8 w-8 rounded-md bg-brand"></div>
           <h1 className="font-bold text-lg">System Name</h1>
         </Link>
@@ -62,10 +64,7 @@ const Sidebar = () => {
               icon={item.icon}
               label={item.label}
               to={item.path}
-              active={
-                pathname === item.path ||
-                (pathname === '/' && item.path === '/dashboard')
-              }
+              active={pathname === item.path}
             />
           ))}
         </div>
